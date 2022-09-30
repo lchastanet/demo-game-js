@@ -1,26 +1,34 @@
-const cards = [
-  { id: 1, color: "blue" },
-  { id: 2, color: "red" },
-  { id: 3, color: "yellow" },
-  { id: 4, color: "green" },
-];
+import shuffleArray from "./utils.js";
 
-let iterator = 0;
-
-function createCard(iterator) {
+function createHTMLCard(card) {
   const div = document.createElement("div");
 
   div.classList.add("bloc");
-  div.style.backgroundColor = cards[iterator].color;
+  div.dataset.win = card.win;
 
   div.addEventListener("click", (event) => {
-    iterator = iterator + 1;
-    if (iterator > cards.length - 1) iterator = 0;
-    event.target.remove();
-    createCard(iterator);
+    if (event.target.dataset.win === "true" ? true : false) {
+      alert("You won !");
+    } else {
+      alert("Try again !");
+    }
+    document.querySelector(".container").innerHTML = "";
+    game();
   });
 
-  document.querySelector("body").append(div);
+  document.querySelector(".container").append(div);
 }
 
-createCard(iterator);
+function game() {
+  const cards = [
+    { id: 1, win: false },
+    { id: 2, win: true },
+    { id: 3, win: false },
+  ];
+
+  shuffleArray(cards);
+
+  cards.forEach((card) => createHTMLCard(card));
+}
+
+game();

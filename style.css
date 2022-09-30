@@ -11,10 +11,17 @@ body {
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
 }
 
 .bloc {
   height: 120px;
   width: 120px;
-  background-color: chocolate;
+  background-color: lightpink;
 }
